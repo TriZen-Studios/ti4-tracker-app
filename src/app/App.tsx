@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {SafeAreaView, StyleSheet, Text, StatusBar} from "react-native";
 
 const App = () => {
