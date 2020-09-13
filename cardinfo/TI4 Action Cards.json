@@ -1,0 +1,131 @@
+{
+  "cards": {
+    "direct_hit": {
+      "id": "direct_hit",
+      "name": "Direct Hit",
+      "type": "effect",
+      "tag": ["tactical.spacecombat.assigninghits", "combat"],
+      "condition": "When another player uses Sustain Damage",
+      "description": "Destroy that ship"
+    },
+    "tactical_retreat": {
+      "id": "tactical_retreat",
+      "name": "Tactical Retreat",
+      "type": "effect",
+      "tag": ["tactical.spacecombat", "combat"],
+      "condition": "Beginning of space combat",
+      "description": "RUNN"
+    },
+    "veto": {
+      "id": "veto",
+      "name": "Veto",
+      "type": "effect",
+      "tag": ["agenda"],
+      "condition": "When agenda is revealed",
+      "description": "Discard that agenda card and reveal next one, players vote on new agenda."
+    },
+    "politics_rider": {
+      "id": "politics_rider",
+      "name": "Politics Rider",
+      "type": "effect",
+      "tag": ["agenda"],
+      "condition": "When agenda is revealed",
+      "description": "Can't vote on agenda, predict outloud the outcome. If correct, gain 3 action cards and speaker token"
+    },
+    "trade_rider": {
+      "id": "trade_rider",
+      "name": "Trade Rider",
+      "type": "effect",
+      "tag": ["agenda"],
+      "condition": "When agenda is revealed",
+      "description": "Can't vote on agenda, predict outloud the outcome. If correct, gain 5 trade goods"
+    },
+    "technology_rider": {
+      "id": "technology_rider",
+      "name": "Technology Rider",
+      "type": "effect",
+      "tag": ["agenda"],
+      "condition": "When agenda is revealed",
+      "description": "Can't vote on agenda, predict outloud the outcome. If correct, research 1 technology"
+    },
+    "assassinate_representative": {
+      "id": "assassinate_representative",
+      "name": "Assassinate Representative",
+      "type": "effect",
+      "tag": ["agenda"],
+      "condition": "When agenda is revealed",
+      "description": "Choose 1 player that cannot vote for agenda"
+    },
+    "distinguish_councilor": {
+      "id": "distinguish_councilor",
+      "name": "Distinguish Councilor",
+      "type": "effect",
+      "tag": ["agenda"],
+      "condition": "When casting votes for agenda",
+      "description": "Cast 5 additional votes"
+    },
+    "bribery": {
+      "id": "bribery",
+      "name": "Bribery",
+      "type":"effect",
+      "tag":["agenda"],
+      "condition": "After speaker votes on agenda",
+      "description": "Spend any number of trade goods to cast 1 additional vote for an outcome you voted for"
+    },
+    "construction_rider": {
+      "id": "construction_rider",
+      "name": "Construction Rider",
+      "type": "effect",
+      "tag": ["agenda"],
+      "condition": "When agenda is revealed",
+      "description": "Can't vote on agenda, predict outloud the outcome. If correct, place 1 space dock from reinforcements on a planet you control"
+    },
+    "warfare_rider": {
+      "id": "warfare_rider",
+      "name": "Warfare Rider",
+      "type": "effect",
+      "tag": ["agenda"],
+      "condition": "When agenda is revealed",
+      "description": "Can't vote on agenda, predict outloud the outcome. If correct, place 1 dreadnought from reinforcements in a system that contains 1 or more of your ships",  
+    },
+    "confusing_legal_text": {
+      "id": "confusing_legal_test",
+      "name": "Confusing Legal Text",
+      "type": "effect",
+      "tag": ["agenda"],
+      "condition": "When you are elected as result of an agenda",
+      "description": "Chose 1 player. That player is elected instead",  
+    },  
+    "diplomacy_rider": {
+        "id": "diplomacy_rider",
+        "name": "Diplomacy Rider",
+        "type": "effect",
+        "tag": ["agenda"],
+        "condition": "When agenda is revealed",
+        "description": "Can't vote on agenda, predict outloud the outcome. If correct, each player places a command token from their reinforcements on a system that contains a planet you control",  
+    },
+    "imperial_rider": {
+      "id": "imperial_rider",
+      "name": "Imperial Rider",
+      "type": "effect",
+      "tag": ["agenda"],
+      "condition": "When agenda is revealed",
+      "description": "Can't vote on agenda, predict outloud the outcome. If correct, gain 1 victory point",
+    },
+    "ancient_burial_sites": {
+      "id": "ancient_burial_sites",
+      "name": "Ancient_Burial_Sites",
+      "type": "effect",
+      "tag": ["agenda"],
+      "condition": "At the start of an agenda phase",
+      "description": "Choose 1 player and exhaust each culturally owned planet by that player",
+    },
+    "leadership_rider": {
+      "id": "leadership_rider",
+      "name": "Leadership Rider",
+      "type": "effect",
+      "tag": ["agenda"],
+      "condition": "When agenda is revealed",
+      "description": "Can't vote on agenda, predict outloud the outcome. If correct, gain 3 command tokens",        
+  }
+}
