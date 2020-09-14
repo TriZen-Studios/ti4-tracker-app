@@ -1,14 +1,21 @@
-import React, {useState, useEffect} from "react";
-import {SafeAreaView, StyleSheet, Text, StatusBar} from "react-native";
+import "react-native-gesture-handler";
+import {NavigationContainer} from "@react-navigation/native";
+import {createStackNavigator} from "@react-navigation/stack";
+import React from "react";
+import {StyleSheet} from "react-native";
+import JoinGameScreen from "./screens/JoinGameScreen";
+import HomeScreen from "./screens/HomeScreen";
+
+const Stack = createStackNavigator();
 
 const App = () => {
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <Text>Twilight Imperium 4: Next Level TRACKER!!! New Text level</Text>
-      </SafeAreaView>
-    </>
+    <NavigationContainer>
+      <Stack.Navigator headerMode="none">
+        <Stack.Screen name="Home">{(props) => <HomeScreen {...props} />}</Stack.Screen>
+        <Stack.Screen name="JoinGameScreen">{(props) => <JoinGameScreen {...props} />}</Stack.Screen>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
