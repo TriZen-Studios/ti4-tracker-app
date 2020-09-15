@@ -6,7 +6,7 @@ export default function HomeScreen(props) {
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView style={{flex: 1}}>
-        <Text>Twilight Imperium 4: Next Level TRACKER!!! New Text level</Text>
+        <Text>Twilight Imperium: Edition 4 Helper</Text>
         <View
           style={{
             display: "flex",
