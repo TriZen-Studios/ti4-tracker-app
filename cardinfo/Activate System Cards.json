@@ -1,0 +1,44 @@
+{
+    "cards": {
+      "upgrade": {
+        "id": "upgrade",
+        "name": "Upgrade",
+        "type": "effect",
+        "tag": ["activate system", "reinforcements"],
+        "condition": "After activating a system with 1 or more of your ships.",
+        "description": "Replace 1 of your cruisers in that system with a dreadnought from your reinforcements."
+      },
+      "flank_speed": {
+        "id": "flank_speed",
+        "name": "Flank Speed",
+        "type": "effect",
+        "tag": ["activate system", "reinforcements", "move"],
+        "condition": "After activating a system.",
+        "description": "Each of your ships gains +1 to move value during tactical action."
+      },
+      "in_the_silence_of_space": {
+        "id": "in_the_silence_of_space",
+        "name": "In the Silence of Space",
+        "type": "effect",
+        "tag": ["activate system", "move"],
+        "condition": "After activating a system.",
+        "description": "During this tactical action, choose 1 system that contains your ships. These ships can now move through systems contaning other players' ships."
+      },
+      "lost_star_chart": {
+        "id": "lost_star_chart",
+        "name": "Lost Star Chart",
+        "type": "effect",
+        "tag": ["activate system", "wormhole"],
+        "condition": "After activating a system.",
+        "description": "During this tactical action, systems that contain alpha and beta wormholes are now adjacent to each other." 
+      },
+      "gravity_drive": {
+        "id": "gravity_drive",
+        "name": "Gravity Drive",
+        "type": "effect",
+        "tag": ["activate system", "move"],
+        "condition": "After activating a system.",
+        "description": "After activating a system, apply +1 to the move value of 1 of your ships during this tactical action.",
+      },
+    },
+},      
