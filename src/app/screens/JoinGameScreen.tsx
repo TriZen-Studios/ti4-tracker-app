@@ -4,9 +4,9 @@ import { SafeAreaView, StyleSheet, Text, View, Button } from "react-native";
 import { SectionList } from "react-native";
 import { MultiplayerContext, MultiplayerContextProvider } from "../common/context/MultiplayerContext";
 
-const Item = ({ title }) => (
+const Item = ({ title, navigation }) => (
   <View style={{ paddingTop: 16 }}>
-    <Button title={title} onPress={() => {}}></Button>
+    <Button title={title} onPress={() => {navigation.navigate("FactionSelectionScreen")}}></Button>
   </View>
 );
 
@@ -34,7 +34,7 @@ export default function JoinGameScreen(props) {
           <SectionList
             sections={state.sessions}
             keyExtractor={(item, index) => item + index}
-            renderItem={({ item }) => <Item title={item} />}
+            renderItem={({item}) => <Item title={item} navigator={props.navigation} {...props} />}
           />
         </View>
         <View style={{ paddingHorizontal: 16, paddingBottom: 16 }}>
