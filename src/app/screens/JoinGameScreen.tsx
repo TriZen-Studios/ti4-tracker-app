@@ -9,11 +9,20 @@ const DATA = [
   }
 ];
 
-const Item = ({title}) => (
-  <View style={{paddingTop: 16}}>
-    <Button title={title} onPress={() => {}}></Button>
-  </View>
-);
+interface Item {
+  title: string;
+  navigation: any;
+}
+
+const Item = (props: Item) => {
+  const {title, navigation} = props;
+
+  return (
+    <View style={{paddingTop: 16}}>
+      <Button title={title} onPress={() => navigation.navigate("FactionSelectionScreen")}></Button>
+    </View>
+  );
+};
 
 export default function JoinGameScreen(props) {
   return (
@@ -31,7 +40,7 @@ export default function JoinGameScreen(props) {
           <SectionList
             sections={DATA}
             keyExtractor={(item, index) => item + index}
-            renderItem={({item}) => <Item title={item} />}
+            renderItem={({item}) => <Item title={item} {...props} />}
           />
         </View>
         <View style={{paddingBottom: 16, paddingLeft: 16, width: 200}}>

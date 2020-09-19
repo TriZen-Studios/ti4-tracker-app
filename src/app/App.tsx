@@ -5,6 +5,7 @@ import React from "react";
 import {StyleSheet} from "react-native";
 import JoinGameScreen from "./screens/JoinGameScreen";
 import HomeScreen from "./screens/HomeScreen";
+import FactionSelectionScreen from "./screens/FactionSelectionScreen";
 
 const Stack = createStackNavigator();
 
@@ -14,6 +15,7 @@ const App = () => {
       <Stack.Navigator headerMode="none">
         <Stack.Screen name="Home">{(props) => <HomeScreen {...props} />}</Stack.Screen>
         <Stack.Screen name="JoinGameScreen">{(props) => <JoinGameScreen {...props} />}</Stack.Screen>
+        <Stack.Screen name="FactionSelectionScreen">{(props) => <FactionSelectionScreen {...props} />}</Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
