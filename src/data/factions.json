@@ -1,0 +1,50 @@
+{
+  "factions": {
+    "letnev": {
+      "id": "letnev",
+      "name": "The Barony of Letnev",
+      "disposition": "Disdainful",
+      "tendencies": "Military",
+      "blurb": "In the darkness of space reside the Letnev. Whether the darkness is innate or whether the Letnev brought it with them is unclear, for they are one and the same.",
+      "starting_units": [
+        "1 dreadnought",
+        "1 carrier",
+        "1 destroyer",
+        "1 fighter",
+        "3 infantry",
+        "1 space dock",
+        "1 extra slot",
+        "second extra"
+      ],
+      "starting_tech": ["Antimass Deflectors", "Plasma Scoring"],
+      "colors": {
+        "primary": "#d62d1a",
+        "secondary": "#c96055",
+        "tertiary": "#4d0801"
+      }
+    },
+    "naalu": {
+      "id": "naalu",
+      "name": "The Naalu Collective",
+      "disposition": "Seductive",
+      "tendencies": "Military",
+      "blurb": "Deadly grace, perilous beauty. The crystalline radiance of the Neffish reflects the very aspects of the Druaa, digging its claws deep in to the minds of the 'lesser' beings of the galaxy.",
+      "starting_units": [
+        "1 carrier",
+        "1 cruiser",
+        "1 destroyer",
+        "3 fighters",
+        "4 infantry",
+        "1 space dock",
+        "1 PDS",
+        "1 extra slot"
+      ],
+      "starting_tech": ["Neural Motivator", "Sarween Tools"],
+      "colors": {
+        "primary": "#7DFE3D",
+        "secondary": "#93C883",
+        "tertiary": "#30660c"
+      }
+    }
+  }
+}
