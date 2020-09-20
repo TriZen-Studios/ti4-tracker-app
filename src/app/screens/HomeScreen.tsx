@@ -14,10 +14,10 @@ export default function HomeScreen(props) {
             flexGrow: 1
           }}>
           <View style={{margin: 15}}>
-            <Button title="Join Game" onPress={() => props.navigation.navigate("JoinGameScreen")} />
+            <Button title="Singleplayer" onPress={() => {}} />
           </View>
           <View style={{margin: 15}}>
-            <Button title="Create Game" onPress={(ev) => {}} />
+            <Button title="Multiplayer" onPress={(ev) => props.navigation.navigate("JoinGameScreen")} />
           </View>
         </View>
       </SafeAreaView>
