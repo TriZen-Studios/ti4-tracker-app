@@ -1,41 +1,50 @@
-import React from "react";
-import {getStatusBarHeight} from "react-native-status-bar-height";
-import {SafeAreaView, StyleSheet, Text, View, Button} from "react-native";
-import {SectionList} from "react-native";
+import React, { useContext } from "react";
+import { getStatusBarHeight } from "react-native-status-bar-height";
+import { SafeAreaView, StyleSheet, Text, View, Button } from "react-native";
+import { SectionList } from "react-native";
+import { MultiplayerContext, MultiplayerContextProvider } from "../common/context/MultiplayerContext";
 
-const DATA = [
-  {
-    data: ["My local game", "other game", "Join me!!"]
-  }
-];
-
-const Item = ({title}) => (
-  <View style={{paddingTop: 16}}>
+const Item = ({ title }) => (
+  <View style={{ paddingTop: 16 }}>
     <Button title={title} onPress={() => {}}></Button>
   </View>
 );
 
 export default function JoinGameScreen(props) {
+  const { state, sendRequest } = useContext(MultiplayerContext) as MultiplayerContextProvider;
+
   return (
     <>
-      <SafeAreaView style={{flex: 1}}>
+      <SafeAreaView style={{ flex: 1 }}>
         <View
           style={{
             paddingTop: 16,
             paddingLeft: 16
           }}>
-          <Text style={{fontSize: 24, alignSelf: "center"}}>Local Games</Text>
+          <Text style={{ fontSize: 24, alignSelf: "center" }}>Local Games</Text>
+          <View style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
+            <Text>
+              <Text style={{ fontSize: 20 }}>Server: </Text>
+              <Text style={{ fontSize: 16 }}>{state.serverUrl}</Text>
+            </Text>
+          </View>
         </View>
 
         <View style={styles.container}>
           <SectionList
-            sections={DATA}
+            sections={state.sessions}
             keyExtractor={(item, index) => item + index}
-            renderItem={({item}) => <Item title={item} />}
+            renderItem={({ item }) => <Item title={item} />}
           />
         </View>
-        <View style={{paddingBottom: 16, paddingLeft: 16, width: 200}}>
-          <Button title="Refresh" onPress={() => {}}></Button>
+        <View style={{ paddingHorizontal: 16, paddingBottom: 16 }}>
+          <Button title="Create Session" onPress={() => {}}></Button>
+        </View>
+        <View style={{ paddingHorizontal: 16, paddingBottom: 16 }}>
+          <Button title="Direct Connect" onPress={() => {}}></Button>
+        </View>
+        <View style={{ paddingHorizontal: 16, paddingBottom: 16 }}>
+          <Button title="Refresh" onPress={() => sendRequest("GET_GAME_SESSIONS")}></Button>
         </View>
       </SafeAreaView>
     </>
