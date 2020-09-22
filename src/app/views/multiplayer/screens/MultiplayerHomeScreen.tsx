@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import { getStatusBarHeight } from "react-native-status-bar-height";
 import { SafeAreaView, StyleSheet, Text, View, Button } from "react-native";
 import { SectionList } from "react-native";
-import { MultiplayerContext, MultiplayerContextProvider } from "../common/context/MultiplayerContext";
-import { AppContext, AppContextProvider } from "../common/context/AppContext";
+import { MultiplayerContext, MultiplayerContextProvider } from "../../../common/context/MultiplayerContext";
+import { AppContext, AppContextProvider } from "../../../common/context/AppContext";
 import { FlatList } from "react-native-gesture-handler";
 
 const Item = ({ title, navigation }) => (
@@ -12,7 +12,7 @@ const Item = ({ title, navigation }) => (
   </View>
 );
 
-export default function JoinGameScreen(props) {
+export default function MultiplayerHomeScreen() {
   const { state, sendRequest } = useContext(MultiplayerContext) as MultiplayerContextProvider;
   const { uniqueId } = useContext(AppContext) as AppContextProvider;
 

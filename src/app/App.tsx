@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import { StyleSheet } from "react-native";
-import JoinGameScreen from "./screens/JoinGameScreen";
+import MultiplayerHomeScreen from "./views/multiplayer/screens/MultiplayerHomeScreen";
 import HomeScreen from "./screens/HomeScreen";
 import MultiplayerContextProvider from "./common/context/MultiplayerContext";
 import AppContextProvider from "./common/context/AppContext";
@@ -19,7 +19,7 @@ const App = () => {
         <Stack.Navigator headerMode="none">
           <Stack.Screen name="Home">{(props) => <HomeScreen {...props} />}</Stack.Screen>
           <Stack.Screen name="FactionSelectionScreen">{(props) => <FactionSelectionScreen {...props} />}</Stack.Screen>
-          <Stack.Screen name="JoinGameScreen">{(props) => <MultiplayerView></MultiplayerView>}</Stack.Screen>
+          <Stack.Screen name="MultiplayerHomeScreen">{(props) => <MultiplayerView></MultiplayerView>}</Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
     </AppContextProvider>

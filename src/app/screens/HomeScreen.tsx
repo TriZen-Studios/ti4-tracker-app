@@ -1,11 +1,11 @@
 import React from "react";
-import {Button, SafeAreaView, StatusBar, Text, View} from "react-native";
+import { Button, SafeAreaView, StatusBar, Text, View } from "react-native";
 
 export default function HomeScreen(props) {
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <SafeAreaView style={{flex: 1}}>
+      <SafeAreaView style={{ flex: 1 }}>
         <Text>Twilight Imperium: Edition 4 Helper</Text>
         <View
           style={{
@@ -13,11 +13,11 @@ export default function HomeScreen(props) {
             justifyContent: "center",
             flexGrow: 1
           }}>
-          <View style={{margin: 15}}>
+          <View style={{ margin: 15 }}>
             <Button title="Singleplayer" onPress={() => {}} />
           </View>
-          <View style={{margin: 15}}>
-            <Button title="Multiplayer" onPress={(ev) => props.navigation.navigate("JoinGameScreen")} />
+          <View style={{ margin: 15 }}>
+            <Button title="Multiplayer" onPress={(ev) => props.navigation.navigate("MultiplayerHomeScreen")} />
           </View>
         </View>
       </SafeAreaView>
