@@ -6,7 +6,7 @@ import { handlers } from "../reducer/handlers";
 import WebSocketClient from "../WebSocketClient";
 import { useRef } from "react";
 
-export const MultiplayerContext = createContext(null);
+export const MultiplayerContext = createContext<any>({});
 
 export interface MultiplayerContextProvider {
   state: any;
@@ -23,9 +23,8 @@ export default function MultiplayerContextProvider(props) {
   const initialState = {
     serverUrl: `ws://${localhost}:3000`,
     webSocket: new WebSocket(`ws://${localhost}:3000`),
-    playerState: {}
+    sessions: {}
   };
-
   const reducer = createReducer(initialState, handlers);
   const [state, dispatch] = useReducer(reducer, initialState);
 

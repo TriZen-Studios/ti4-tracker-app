@@ -13,8 +13,15 @@ export default function WebSocketClient(props) {
       const data = parsedData.data;
 
       switch (action) {
+        case "CREATE_GAME_SESSION":
         case "GET_GAME_SESSIONS":
-          updateProp("sessions", data);
+          const sessions = Object.entries(data).map(([key, value]: [string, any]) => {
+            return {
+              id: key,
+              name: value.name
+            };
+          });
+          updateProp("sessions", sessions);
           break;
         default:
       }
