@@ -3,6 +3,8 @@ import { getStatusBarHeight } from "react-native-status-bar-height";
 import { SafeAreaView, StyleSheet, Text, View, Button } from "react-native";
 import { SectionList } from "react-native";
 import { MultiplayerContext, MultiplayerContextProvider } from "../common/context/MultiplayerContext";
+import { AppContext, AppContextProvider } from "../common/context/AppContext";
+import { FlatList } from "react-native-gesture-handler";
 
 const Item = ({ title, navigation }) => (
   <View style={{ paddingTop: 16 }}>
@@ -12,6 +14,7 @@ const Item = ({ title, navigation }) => (
 
 export default function JoinGameScreen(props) {
   const { state, sendRequest } = useContext(MultiplayerContext) as MultiplayerContextProvider;
+  const { uniqueId } = useContext(AppContext) as AppContextProvider;
 
   return (
     <>
@@ -31,14 +34,18 @@ export default function JoinGameScreen(props) {
         </View>
 
         <View style={styles.container}>
-          <SectionList
-            sections={state.sessions}
-            keyExtractor={(item, index) => item + index}
-            renderItem={({item}) => <Item title={item} navigator={props.navigation} {...props} />}
+          <FlatList
+            data={state.sessions}
+            keyExtractor={(item: any) => item.id}
+            renderItem={({ item }) => <Item title={item.name} navigation={props.navigation} />}
           />
         </View>
         <View style={{ paddingHorizontal: 16, paddingBottom: 16 }}>
-          <Button title="Create Session" onPress={() => {}}></Button>
+          <Button
+            title="Create Session"
+            onPress={() =>
+              sendRequest("CREATE_GAME_SESSION", { sessionId: uniqueId, name: uniqueId.substr(0, 7).toUpperCase() })
+            }></Button>
         </View>
         <View style={{ paddingHorizontal: 16, paddingBottom: 16 }}>
           <Button title="Direct Connect" onPress={() => {}}></Button>
