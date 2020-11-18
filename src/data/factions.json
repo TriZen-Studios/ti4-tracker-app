@@ -1,6 +1,7 @@
 {
-  "factions": {
-    "letnev": {
+  "title": "Faction List",
+  "data": [
+    {
       "id": "letnev",
       "name": "The Barony of Letnev",
       "disposition": "Disdainful",
@@ -23,7 +24,7 @@
         "tertiary": "#4d0801"
       }
     },
-    "naalu": {
+    {
       "id": "naalu",
       "name": "The Naalu Collective",
       "disposition": "Seductive",
@@ -46,5 +47,5 @@
         "tertiary": "#30660c"
       }
     }
-  }
+  ]
 }
