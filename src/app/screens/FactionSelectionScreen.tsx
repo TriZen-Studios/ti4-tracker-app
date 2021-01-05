@@ -100,7 +100,7 @@ const Item = ({currFaction, selectedLocation, swipeObj}) => (
           // have to go around the length of the list
           swipe.scrollBy(factionJSON.data.length - diff);
         }
-        console.log(currentIndex);
+        //console.log(currentIndex);
       }}>
       <Text style={{fontSize: 20, textAlign: "center", color: "white"}}>{currFaction.name}</Text>
     </TouchableOpacity>
@@ -133,7 +133,7 @@ export default function FactionSelectionScreen(props) {
               <Button
                 icon={<Icon name="angle-down" size={15} color="white" />}
                 onPress={() => {
-                  console.log("setting modal visibility to " + !modalVisible);
+                  //console.log("setting modal visibility to " + !modalVisible);
                   setModalVisible(!modalVisible);
                 }}
               />
@@ -166,7 +166,7 @@ export default function FactionSelectionScreen(props) {
             showsPagination={false}
             showsButtons={true}
             onIndexChanged={(index) => {
-              console.log("swiper index: " + index);
+              //console.log("swiper index: " + index);
               forceUpdate;
             }}>
             <FactionInfo faction={factionJSON.data[0]} />
