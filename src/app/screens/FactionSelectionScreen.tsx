@@ -6,17 +6,6 @@ import Swiper from "react-native-swiper";
 import Icon from "react-native-vector-icons/FontAwesome";
 import * as factionJSON from "../../data/factions.json";
 
-const DATA = [
-  {
-    id: "0",
-    title: factionJSON.data[0].name
-  },
-  {
-    id: "1",
-    title: factionJSON.data[1].name
-  }
-];
-
 interface Faction {
   id: string;
   name: string;
@@ -34,9 +23,11 @@ interface Faction {
 
 const FactionInfo = (props) => {
   let faction: Faction = props.faction;
-  console.log("creating faction: " + faction.id);
-  const unitList = faction.starting_units.map((unit) => <Text style={{color: "white"}}>{unit}</Text>);
-  //console.log(unitList);
+  const unitList = faction.starting_units.map((unit) => (
+    <Text key={unit} style={{color: "white", paddingLeft: 65, paddingBottom: 5}}>
+      {unit}
+    </Text>
+  ));
 
   return (
     <View style={{paddingTop: 16, paddingLeft: 16, flexDirection: "column"}}>
@@ -68,9 +59,7 @@ const FactionInfo = (props) => {
           flexWrap: "wrap",
           height: 100
         }}>
-        {faction.starting_units.map((unit) => (
-          <Text style={{color: "white", paddingLeft: 65, paddingBottom: 5}}>{unit}</Text>
-        ))}
+        {unitList}
       </View>
       <Text
         style={{
@@ -89,25 +78,41 @@ const FactionInfo = (props) => {
           height: 50
         }}>
         {faction.starting_tech.map((unit) => (
-          <Text style={{color: "white", paddingLeft: 45, paddingBottom: 10}}>{unit}</Text>
+          <Text key={unit} style={{color: "white", paddingLeft: 45, paddingBottom: 10}}>
+            {unit}
+          </Text>
         ))}
       </View>
     </View>
   );
 };
 
-const Item = ({currFaction, swipeObj}) => (
-  <View style={{paddingTop: 8, alignItems: "center"}}>
-    <TouchableOpacity onPress={() => console.log("going to key: " + parseInt(key))}>
-      {/** swipeObj.current.scrollTo(parseInt(key), true)}> */}
-      <Text style={{fontSize: 20, textAlign: "center", color: "white"}}>{title}</Text>
+const Item = ({currFaction, selectedLocation, swipeObj}) => (
+  <View style={{paddingTop: 13, alignItems: "center"}}>
+    <TouchableOpacity
+      onPress={() => {
+        let swipe: Swiper = swipeObj.current;
+        let currentIndex = swipe.props.index;
+        let diff = Math.abs(currentIndex - selectedLocation);
+        if (currentIndex < selectedLocation) {
+          swipe.scrollBy(diff);
+        } else {
+          // have to go around the length of the list
+          swipe.scrollBy(factionJSON.data.length - diff);
+        }
+        console.log(currentIndex);
+      }}>
+      <Text style={{fontSize: 20, textAlign: "center", color: "white"}}>{currFaction.name}</Text>
     </TouchableOpacity>
   </View>
 );
 
+const useForceUpdate = () => useState()[0];
+
 export default function FactionSelectionScreen(props) {
   const [modalVisible, setModalVisible] = useState(false);
   const swiper = useRef<Swiper>(null);
+  const forceUpdate = useForceUpdate();
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -149,7 +154,7 @@ export default function FactionSelectionScreen(props) {
               <FlatList
                 data={factionJSON.data}
                 keyExtractor={(item) => item.id}
-                renderItem={({item}) => <Item currFaction={item} swipeObj={swiper} />}
+                renderItem={({item, index}) => <Item currFaction={item} selectedLocation={index} swipeObj={swiper} />}
               />
             </View>
           ) : null}
@@ -160,7 +165,10 @@ export default function FactionSelectionScreen(props) {
             index={0}
             showsPagination={false}
             showsButtons={true}
-            onIndexChanged={(index) => console.log("swiper index: " + index)}>
+            onIndexChanged={(index) => {
+              console.log("swiper index: " + index);
+              forceUpdate;
+            }}>
             <FactionInfo faction={factionJSON.data[0]} />
             <FactionInfo faction={factionJSON.data[1]} />
           </Swiper>
