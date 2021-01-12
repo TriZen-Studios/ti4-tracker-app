@@ -21,8 +21,8 @@ interface Faction {
   };
 }
 
-const FactionInfo = (props) => {
-  let faction: Faction = props.faction;
+function FactionInfo (props) {
+  const faction: Faction = props.faction;
   const unitList = faction.starting_units.map((unit) => (
     <Text key={unit} style={{color: "white", paddingLeft: 65, paddingBottom: 5}}>
       {unit}
@@ -87,32 +87,40 @@ const FactionInfo = (props) => {
   );
 };
 
-const Item = ({currFaction, selectedLocation, swipeObj}) => (
-  <View style={{paddingTop: 13, alignItems: "center"}}>
-    <TouchableOpacity
-      onPress={() => {
-        let swipe: Swiper = swipeObj.current;
-        let currentIndex = swipe.props.index;
-        let diff = Math.abs(currentIndex - selectedLocation);
-        if (currentIndex < selectedLocation) {
-          swipe.scrollBy(diff);
-        } else {
-          // have to go around the length of the list
-          swipe.scrollBy(factionJSON.data.length - diff);
-        }
-        //console.log(currentIndex);
-      }}>
-      <Text style={{fontSize: 20, textAlign: "center", color: "white"}}>{currFaction.name}</Text>
-    </TouchableOpacity>
-  </View>
-);
+function Item ({currFaction, selectedLocation, swipeObj}) {
+  return (
+    <View style={{paddingTop: 13, alignItems: "center"}}>
+      <TouchableOpacity
+        onPress={() => {
+          let swipe: Swiper = swipeObj.current;
+          let currentIndex = swipe.props.index;
+          console.log(currentIndex + "  current swiper index");
+          console.log(selectedLocation + " user selected faction index");
+          let diff = Math.abs(currentIndex - selectedLocation);
+          if (currentIndex < selectedLocation) {
+            swipe.scrollBy(diff);
+          } else if (currentIndex > selectedLocation) {
+            // have to go around the length of the list
+            swipe.scrollBy(factionJSON.data.length - diff);
+          }
+        }}>
+        <Text style={{fontSize: 20, textAlign: "center", color: "white"}}>{currFaction.name}</Text>
+      </TouchableOpacity>
+    </View>
+  )
+};
+
+// function useForceUpdate(){
+//   const [value, setValue] = useState(0); // integer state
+//   return () => setValue(value => value + 1); // update the state to force render
+// }
 
 const useForceUpdate = () => useState()[0];
 
 export default function FactionSelectionScreen(props) {
   const [modalVisible, setModalVisible] = useState(false);
   const swiper = useRef<Swiper>(null);
-  const forceUpdate = useForceUpdate();
+  const [curIndex, setCurIndex] = useState(0);
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -133,7 +141,6 @@ export default function FactionSelectionScreen(props) {
               <Button
                 icon={<Icon name="angle-down" size={15} color="white" />}
                 onPress={() => {
-                  //console.log("setting modal visibility to " + !modalVisible);
                   setModalVisible(!modalVisible);
                 }}
               />
@@ -165,9 +172,8 @@ export default function FactionSelectionScreen(props) {
             index={0}
             showsPagination={false}
             showsButtons={true}
-            onIndexChanged={(index) => {
-              //console.log("swiper index: " + index);
-              forceUpdate;
+            onIndexChanged={ () => {
+              setCurIndex(swiper.current.props.index);
             }}>
             <FactionInfo faction={factionJSON.data[0]} />
             <FactionInfo faction={factionJSON.data[1]} />
