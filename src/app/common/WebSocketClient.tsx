@@ -1,29 +1,25 @@
 import { useContext } from "react";
 import { MultiplayerContext, MultiplayerContextProvider } from "./context/MultiplayerContext";
 import _ from "lodash";
+import { SessionContext, SessionContextProviderValue } from "./context/SessionContext";
 
 export default function WebSocketClient(props) {
-  const { state, updateProp, deleteProp, reset } = useContext(MultiplayerContext) as MultiplayerContextProvider;
+  const { updateProp } = useContext(SessionContext) as SessionContextProviderValue;
 
   const webSocket: WebSocket = props.webSocket;
   webSocket.onmessage = (e) => {
     try {
       const parsedData = JSON.parse(e.data);
       const action = parsedData.action;
-      const data = parsedData.data;
 
       switch (action) {
-        case "CREATE_GAME_SESSION":
-        case "GET_GAME_SESSIONS":
-          const sessions = Object.entries(data).map(([key, value]: [string, any]) => {
-            return {
-              id: key,
-              name: value.name
-            };
-          });
-          updateProp("sessions", sessions);
+        case "UPDATE_STATE":
+          let path = parsedData.path;
+          let value = parsedData.value;
+          updateProp(path, value);
           break;
         default:
+          throw new Error(`${action} not implemented`);
       }
     } catch (err) {
       const error = {
