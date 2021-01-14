@@ -6,7 +6,7 @@
       "name": "The Barony of Letnev",
       "disposition": "Disdainful",
       "tendencies": "Military",
-      "blurb": "In the darkness of space reside the Letnev. Whether the darkness is innate or whether the Letnev brought it with them is unclear, for they are one and the same.",
+      "brief_description": "In the darkness of space reside the Letnev. Whether the darkness is innate or whether the Letnev brought it with them is unclear, for they are one and the same.",
       "starting_units": [
         "1 dreadnought",
         "1 carrier",
@@ -29,7 +29,7 @@
       "name": "The Naalu Collective",
       "disposition": "Seductive",
       "tendencies": "Military",
-      "blurb": "Deadly grace, perilous beauty. The crystalline radiance of the Neffish reflects the very aspects of the Druaa, digging its claws deep in to the minds of the 'lesser' beings of the galaxy.",
+      "brief_description": "Deadly grace, perilous beauty. The crystalline radiance of the Neffish reflects the very aspects of the Druaa, digging its claws deep in to the minds of the 'lesser' beings of the galaxy.",
       "starting_units": [
         "1 carrier",
         "1 cruiser",
