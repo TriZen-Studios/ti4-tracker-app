@@ -4,6 +4,7 @@ import { SafeAreaView, Text, Button, View, FlatList, BackHandler } from "react-n
 import { MultiplayerContext, MultiplayerContextProvider } from "../../../common/context/MultiplayerContext";
 import { useFocusEffect } from "@react-navigation/native";
 import { SessionContext, SessionContextProviderValue } from "../../../common/context/SessionContext";
+import { useNavigation } from "@react-navigation/native";
 
 function Player({ player }) {
   return (
@@ -18,6 +19,7 @@ export default function SessionScreen(props) {
   const { state: sessionState } = useContext(SessionContext) as SessionContextProviderValue;
   const { sessionId, playerId, name } = props.route.params;
   const [_players, _setPlayers] = useState([]);
+  const navigation = useNavigation();
 
   useFocusEffect(
     React.useCallback(() => {
@@ -36,17 +38,28 @@ export default function SessionScreen(props) {
   );
 
   useEffect(() => {
-    const players = sessionState.sessions[sessionId]?.players;
-    if (players) {
-      // list view needs id prop for rendering optimization
-      _setPlayers(Object.entries(sessionState.sessions[sessionId].players).map(([key, value]: [string, any]) => {
-        return {
-          id: key,
-          ...value
-        };
-      }));
+    const session = sessionState.sessions[sessionId];
+    if(session) {
+      const players = session.players;
+      if(session.status == "open") {
+        if (players) {
+          // list view needs id prop for rendering optimization
+          _setPlayers(Object.entries(session.players).map(([key, value]: [string, any]) => {
+            return {
+              id: key,
+              ...value
+            };
+          }));
+        }
+      }      
+      else if (session.status == "closed") {
+        // no need to go back again if host left game
+        if(sessionId !== playerId) {
+          navigation.goBack();
+        }
+      }
     }
-  }, [sessionState.sessions[sessionId]?.players]);
+  }, [sessionState.sessions[sessionId]]);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
