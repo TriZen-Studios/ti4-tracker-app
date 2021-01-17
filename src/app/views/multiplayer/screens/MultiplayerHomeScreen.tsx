@@ -36,7 +36,6 @@ export default function MultiplayerHomeScreen() {
   const { state: sessionState, updateProp } = useContext(SessionContext) as SessionContextProviderValue;
   const navigation = useNavigation();
   const [_sessions, _setSessions] = useState([]);
-
   useEffect(() => {
     if (sessionState["sessions"]) {
       const sessions = Object.entries(sessionState["sessions"]).map(([key, value]: [string, any]) => {
@@ -44,8 +43,8 @@ export default function MultiplayerHomeScreen() {
           id: key,
           data: value
         };
-      });
-      _setSessions(sessions);
+      })
+      _setSessions(sessions.filter(session => session.data.status !== "closed"));
     }
   }, [sessionState["sessions"]]);
 
