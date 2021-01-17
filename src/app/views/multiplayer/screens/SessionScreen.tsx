@@ -36,20 +36,17 @@ export default function SessionScreen(props) {
   );
 
   useEffect(() => {
-    console.log("in session screen");
-    console.log(sessionId);
-    console.log(sessionState);
-    console.log(sessionState[sessionId]);
-    if (sessionState[sessionId]?.players) {
-      const players = Object.entries(sessionState[sessionId].players).map(([key, value]: [string, any]) => {
+    const players = sessionState.sessions[sessionId]?.players;
+    if (players) {
+      // list view needs id prop for rendering optimization
+      _setPlayers(Object.entries(sessionState.sessions[sessionId].players).map(([key, value]: [string, any]) => {
         return {
           id: key,
           ...value
         };
-      });
-      _setPlayers(players);
+      }));
     }
-  }, [sessionState[sessionId]]);
+  }, [sessionState.sessions[sessionId]?.players]);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
