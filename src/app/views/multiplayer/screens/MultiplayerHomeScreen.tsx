@@ -7,6 +7,7 @@ import { AppContext, AppContextProvider } from "../../../common/context/AppConte
 import { FlatList } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { SessionContext, SessionContextProviderValue } from "../../../common/context/SessionContext";
+import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 
 function Item({ session, player }) {
   const navigation = useNavigation();
@@ -34,8 +35,11 @@ function Item({ session, player }) {
 export default function MultiplayerHomeScreen() {
   const { state: multiplayerState, sendRequest } = useContext(MultiplayerContext) as MultiplayerContextProvider;
   const { state: sessionState, updateProp } = useContext(SessionContext) as SessionContextProviderValue;
+  const { getItem, setItem } = useAsyncStorage("playerName");
+
   const navigation = useNavigation();
   const [_sessions, _setSessions] = useState([]);
+  const [_playerName, _setPlayerName] = useState(null);
   useEffect(() => {
     if (sessionState["sessions"]) {
       const sessions = Object.entries(sessionState["sessions"]).map(([key, value]: [string, any]) => {
@@ -43,10 +47,26 @@ export default function MultiplayerHomeScreen() {
           id: key,
           data: value
         };
-      })
-      _setSessions(sessions.filter(session => session.data.status !== "closed"));
+      });
+      _setSessions(sessions.filter((session) => session.data.status !== "closed"));
     }
   }, [sessionState["sessions"]]);
+
+  const writeItemToStorage = async (newValue) => {
+    await setItem(newValue);
+    _setPlayerName(newValue);
+  };
+
+  // read player name from async storage
+  useEffect(() => {
+    const readItemFromStorage = async () => {
+      const item = await getItem();
+      _setPlayerName(item);
+      updateProp("player.name", item);
+    };
+
+    readItemFromStorage();
+  }, []);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -73,8 +93,14 @@ export default function MultiplayerHomeScreen() {
           <Text style={{ fontSize: 20, justifyContent: "center" }}>Player Name: </Text>
           <TextInput
             style={{ height: 40, borderColor: "gray", borderWidth: 1, flexGrow: 1 }}
-            onChangeText={(text) => updateProp("player.name", text)}
-            value={sessionState.player.name}
+            onChangeText={(text) => {
+              _setPlayerName(text);
+            }}
+            onSubmitEditing={(event) => {
+              writeItemToStorage(event.nativeEvent.text);
+              updateProp("player.name", event.nativeEvent.text);
+            }}
+            value={_playerName}
           />
         </View>
       </View>
